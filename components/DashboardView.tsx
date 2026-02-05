@@ -1,17 +1,20 @@
 
 import React from 'react';
-import { WorkerPC, AdPost, PostStatus } from '../types';
+import { WorkerPC, AdPost, PostStatus, EmailAlias, SiteAccount } from '../types';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts';
 
 interface DashboardViewProps {
   workers: WorkerPC[];
   posts: AdPost[];
+  aliases: EmailAlias[];
+  accounts: SiteAccount[];
 }
 
-export const DashboardView: React.FC<DashboardViewProps> = ({ workers, posts }) => {
+export const DashboardView: React.FC<DashboardViewProps> = ({ workers, posts, aliases, accounts }) => {
   const liveCount = posts.filter(p => p.status === PostStatus.LIVE).length;
   const flaggedCount = posts.filter(p => p.status === PostStatus.FLAGGED).length;
   const onlineWorkers = workers.filter(w => w.status !== 'OFFLINE').length;
+  const registeredAccounts = accounts.filter(account => account.status === 'REGISTERED').length;
 
   // Mock data for charts
   const chartData = [
@@ -27,11 +30,13 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ workers, posts }) 
   return (
     <div className="space-y-6">
       {/* Top Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6">
         <StatCard title="Total Posts" value={posts.length} icon="📝" color="blue" />
         <StatCard title="Live Ads" value={liveCount} icon="✅" color="emerald" />
         <StatCard title="Flagged" value={flaggedCount} icon="⚠️" color="rose" />
         <StatCard title="Active PCs" value={`${onlineWorkers}/${workers.length}`} icon="💻" color="amber" />
+        <StatCard title="Email Aliases" value={aliases.length} icon="✉️" color="blue" />
+        <StatCard title="Registered Accounts" value={registeredAccounts} icon="👤" color="emerald" />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
