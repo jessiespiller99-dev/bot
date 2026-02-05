@@ -2,8 +2,8 @@
 import React from 'react';
 
 interface SidebarProps {
-  activeTab: 'dashboard' | 'workers' | 'campaigns' | 'tracker';
-  setActiveTab: (tab: 'dashboard' | 'workers' | 'campaigns' | 'tracker') => void;
+  activeTab: 'dashboard' | 'workers' | 'campaigns' | 'tracker' | 'data';
+  setActiveTab: (tab: 'dashboard' | 'workers' | 'campaigns' | 'tracker' | 'data') => void;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
@@ -12,6 +12,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => 
     { id: 'workers', label: 'PC Nodes', icon: '💻' },
     { id: 'campaigns', label: 'Campaigns', icon: '📝' },
     { id: 'tracker', label: 'Live Tracker', icon: '🌐' },
+    { id: 'data', label: 'Data Manager', icon: '🗂️' },
   ];
 
   return (
@@ -45,7 +46,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => 
           <div className="text-xs text-slate-500 uppercase font-bold mb-2">System Status</div>
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
-            <span className="text-sm text-slate-300">Automation Core Active</span>
+            <span className="text-sm text-slate-300">Dashboard Ready</span>
           </div>
         </div>
       </div>

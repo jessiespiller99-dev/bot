@@ -42,3 +42,19 @@ export interface CampaignConfig {
   category: Category;
   imageUrls: string[];
 }
+
+export interface EmailAlias {
+  id: string;
+  address: string;
+  status: 'AVAILABLE' | 'CONFIRMED' | 'USED';
+  createdAt: string;
+}
+
+export interface SiteAccount {
+  id: string;
+  email: string;
+  username: string;
+  status: 'REGISTERED' | 'PENDING' | 'LOCKED';
+  createdAt: string;
+  focusCity?: string;
+}
